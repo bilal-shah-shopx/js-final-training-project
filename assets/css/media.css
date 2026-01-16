@@ -1,0 +1,37 @@
+@media screen and (min-width: 577px) {
+    .plans-section .logo {
+        width: 100%;
+        max-width: 60px;
+        height: auto;
+        min-height: 60px;
+    }
+
+    .plans-section .footer {
+        width: auto;
+    }
+
+    .plans-section .shipping,
+    .plans-section p.heading {
+        font-size: 10px;
+    }
+
+    .plans-section h4.heading {
+        font-size: 25px;
+    }
+
+    .plans-section .footer:hover {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .plans-section .meals-img span {
+        left: 28px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .plans-section .meals-img span {
+        left: 7px;
+    }
+}
