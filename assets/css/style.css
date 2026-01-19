@@ -224,3 +224,56 @@ body, td, tfoot, th, thead, tr {
 .accordion-header{
     border-bottom: 1px solid #ccc;
 }
+
+/* Meals Section*/
+.meals-section .card{
+    border-color:#DFDFDF;
+    border-radius: 0;
+}
+
+.meals-section #add-btn{
+    background-image: linear-gradient(to right, var(--btn-left), var(--btn-right));
+    font-size: 16px;
+}
+
+.meals-section .title{
+    font-size: 14px;
+}
+
+.meals-section .desc{
+    font-size: 12px;
+    color: #707070;
+}
+
+.meals-section .featured{
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.meals-section .card-img-top{
+    position: relative;
+}
+
+.meals-section .extra-price{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--highlight);
+}
+
+.wrapper{
+    height: 91.5vh;
+    right: 0;
+}
+
+.border-top{
+    border-radius: 20px;
+}
+
+.custom-card .card{
+    background-color: #F3F3F3;
+}
+
+.fa-plus, .fa-minus{
+    color: #717171;
+}
