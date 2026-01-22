@@ -5,108 +5,1027 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/media.css">
     <title>Freshly</title>
 </head>
 
 <body>
-    <nav class="py-4 py-md-3 border-bottom sticky-top bg-white">
-        <ol class="breadcrumb m-0 justify-content-center">
-            <li class="breadcrumb-item fw-bold m-0 p-0"><a class="text-decoration-none" href="index.html">Plans</a></li>
-            <li class="breadcrumb-item active p-0">Day</li>
-            <li class="breadcrumb-item active p-0">Meals</li>
-            <li class="breadcrumb-item active p-0">Checkout</li>
-        </ol>
-    </nav>
-    <section class="plans-section">
-        <div class="container-fluid py-4">
-            <div class="row gap-2">
-                <div
-                    class="col-12 col-md-8 px-5 mx-auto d-flex flex-column justify-content-center align-items-center text-center">
-                    <img src="assets/images/logo.svg" class="mx-auto logo" alt="Logo">
-                    <h2 class="heading mt-3">Flexible plans that fits your life</h2>
-                    <p class="heading px-4">We offer anywhere from 4-12 meals per week, starting at
-                        <span class="price">$11.49/meal</span>.
-                        <strong>The bigger your box, the more you'll save </strong>
-                        - and you can always pause, cancel, or change your plan at any time.
-                    </p>
-                </div>
-                <div class="col-12 d-flex flex-column justify-content-center align-items-center text-center">
-                    <div class="row justify-content-center gap-3">
-                        <div id="plan-1" class="col-5 col-lg-3 px-0 plan">
-                            <div class="d-flex flex-column gap-3 px-0">
-                                <div class="meals-img">
-                                    <span class="rounded-pill text-dark bg-white px-2 p-0">Save upto 10$</span>
-                                    <img src="assets/images/4-meals.png" alt="4-meals" class="img-fluid">
-                                </div>
-                                <div>
-                                    <p class="m-0 p-0">
-                                        <strong class="meals"><span class="count"></span> Meals</strong>
-                                        <span class="per-week">(per week)</span>
-                                    </p>
-                                    <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
-                                    <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="plan-2" class="col-5 col-lg-3 px-0 plan">
-                            <div class="d-flex flex-column gap-3">
-                                <div class="meals-img">
-                                    <img class="img-fluid" src="assets/images/6-meals.png" alt="6-meals">
-                                </div>
-                                <div>
-                                    <p class="m-0 p-0">
-                                        <strong class="meals"><span class="count"></span> Meals</strong>
-                                        <span class="per-week">(per week)</span>
-                                    </p>
-                                    <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
-                                    <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="plan-3" class="col-5 col-lg-3 px-0 plan">
-                            <div class="d-flex flex-column gap-3">
-                                <div class="meals-img">
-                                    <img class="img-fluid" src="assets/images/10-meals.png" alt="10-meals">
-                                </div>
-                                <div>
-                                    <p class="m-0 p-0">
-                                        <strong class="meals"><span class="count"></span> Meals</strong>
-                                        <span class="per-week">(per week)</span>
-                                    </p>
-                                    <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
-                                    <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="plan-4" class="col-5 col-lg-3 px-0 plan">
-                            <div class="d-flex flex-column gap-3">
-                                <div class="meals-img">
-                                    <img class="img-fluid" src="assets/images/12-meals.png" alt="12-meals">
-                                </div>
-                                <div>
-                                    <p class="m-0 p-0">
-                                        <strong class="meals"><span class="count"></span> Meals</strong>
-                                        <span class="per-week">(per week)</span>
-                                    <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
-                                    <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+    <div id="wizard">
+
+        <!--Plans Section-->
+        <h3 class="steps-heading">Plans</h3>
+        <section class="plans-section">
+            <div class="container-fluid pb-5 pt-2">
+                <div class="row gap-2">
+                    <div
+                        class="col-12 col-md-7 px-5 mx-auto d-flex flex-column justify-content-center align-items-center text-center">
+                        <img src="assets/images/logo.svg" class="mx-auto img-fluid logo" alt="Logo">
+                        <h2 class="heading mt-3">Flexible plans that fits your life</h2>
+                        <p class="heading px-4">We offer anywhere from 4-12 meals per week, starting at
+                            <span class="price">$11.49/meal</span>.
+                            <strong>The bigger your box, the more you'll save </strong>
+                            - and you can always pause, cancel, or change your plan at any time.
+                        </p>
                     </div>
-                    <div class="row footer">
-                        <div class="col-12">
-                            <p class="shipping m-0 p-0 mt-4 mb-3">Shipping and tax added at checkout</p>
-                            <button id="start-btn" class="btn px-3"><a class="text-decoration-none text-white" href="day.html">Get Started</a></button>
+                    <div class="col-12 d-flex flex-column justify-content-center align-items-center text-center">
+                        <div class="row w-100">
+                            <div class="col-12 col-md-10 d-flex flex-column flex-md-row justify-content-center mx-auto gap-3">
+                                <div id="plan-1" class="col-5 col-lg-3 px-0 plan">
+                                    <div class="d-flex flex-column gap-3 px-0">
+                                        <div class="meals-img">
+                                            <span class="rounded-pill text-dark bg-white px-2 p-0">Save upto 10$</span>
+                                            <img src="assets/images/4-meals.png" alt="4-meals" class="img-fluid w-100">
+                                        </div>
+                                        <div>
+                                            <p class="m-0 p-0">
+                                                <strong class="meals"><span class="count"></span> Meals</strong>
+                                                <span class="per-week">(per week)</span>
+                                            </p>
+                                            <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
+                                            <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="plan-2" class="col-5 col-lg-3 px-0 plan">
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="meals-img">
+                                            <img class="img-fluid w-100" src="assets/images/6-meals.png" alt="6-meals">
+                                        </div>
+                                        <div>
+                                            <p class="m-0 p-0">
+                                                <strong class="meals"><span class="count"></span> Meals</strong>
+                                                <span class="per-week">(per week)</span>
+                                            </p>
+                                            <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
+                                            <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="plan-3" class="col-5 col-lg-3 px-0 plan">
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="meals-img">
+                                            <img class="img-fluid w-100" src="assets/images/10-meals.png" alt="10-meals">
+                                        </div>
+                                        <div>
+                                            <p class="m-0 p-0">
+                                                <strong class="meals"><span class="count"></span> Meals</strong>
+                                                <span class="per-week">(per week)</span>
+                                            </p>
+                                            <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
+                                            <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="plan-4" class="col-5 col-lg-3 px-0 plan">
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="meals-img">
+                                            <img class="img-fluid w-100" src="assets/images/12-meals.png" alt="12-meals">
+                                        </div>
+                                        <div>
+                                            <p class="m-0 p-0">
+                                                <strong class="meals"><span class="count"></span> Meals</strong>
+                                                <span class="per-week">(per week)</span>
+                                            <p class="m-0 p-0 plan-price">Plan Price: <span class="price"></span></p>
+                                            <p class="m-0 p-0 per-meal">$<span class="per-price"></span>/meal</p>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row footer">
+                            <div class="col-12">
+                                <p class="shipping m-0 p-0 mt-5 mb-3">Shipping and tax added at checkout</p>
+                                <button id="start-btn" class="btn my-auto text-white">Get Started</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <script type="module" src="assets/js/script.js"></script>
+        </section>
+
+         <!--Day Section-->
+        <h3 class="steps-heading">Day</h3>
+        <section class="day-section">
+            <div class="container-fluid pb-4">
+                <div class="row">
+                    <div class="col-12 mx-auto d-flex justify-content-center align-items-center my-4">
+                        <h2 class="heading mt-2 text-center">Choose your delivery day</h2>
+                    </div>
+
+                    <div class="col-10 col-md-6 col-lg-4 px-lg-5 mx-auto d-flex flex-column justify-content-center">
+                        <div class="table-container w-100 mb-3 d-flex">
+                            <table class="table table-bordered bg-white">
+                                <tr class="day" id="day-1">
+                                    <td class="ps-4">
+                                        <div class="d-flex justify-content-between align-items-center popular">
+                                            <span class="date"></span>
+                                            <span class="pe-3 popular-text">Most Popular</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="day" id="day-2">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-3">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-4">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-5">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-6">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-7">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-8">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-9">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                                <tr class="day" id="day-10">
+                                    <td class="ps-4 date"></td>
+                                </tr>
+                            </table>
+                            <div class="scroll">
+                            </div>
+                        </div>
+                        <button id="next-btn" class="btn text-white">Next</button>
+                        <p class="footer-text mt-4 p-0 m-0 text-center">First Delivery Date: <strong
+                                id="delivery-date"></strong>
+                        </p>
+                    </div>
+                </div>
+                <!--Accordion-->
+                <div class="container py-5 mb-5">
+                    <hr>
+                    <h1 class="text-center pt-5 pb-2">Common Questions</h1>
+                    <div class="row mx-auto d-flex flex-column justify-content-center align-items-center">
+                        <div class="col-12 col-md-10">
+                            <div class="accordion" id="common-questions">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-1">
+                                            How many servings are your meals?
+                                        </button>
+                                    </h2>
+                                    <div id="question-1" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-2">
+                                            Do you accommodate dietary preferences?
+                                        </button>
+                                    </h2>
+                                    <div id="question-2" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-3">
+                                            How long do the meals last?
+                                        </button>
+                                    </h2>
+                                    <div id="question-3" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-4">
+                                            How do I heat up my meals?
+                                        </button>
+                                    </h2>
+                                    <div id="question-4" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-5">
+                                            How does shipping work?
+                                        </button>
+                                    </h2>
+                                    <div id="question-5" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-6">
+                                            How does the subscription work?
+                                        </button>
+                                    </h2>
+                                    <div id="question-6" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-7">
+                                            How does shipping work?
+                                        </button>
+                                    </h2>
+                                    <div id="question-7" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#question-8">
+                                            How does the subscription work?
+                                        </button>
+                                    </h2>
+                                    <div id="question-8" class="collapse" data-bs-parent="#common-questions">
+                                        <div class="accordion-body">
+                                            <p>The majority of our meals are single serving and meant to feed an average
+                                                adult.
+                                                We also offer multi-serve proteins and sides, which are designed to feed
+                                                multiple people
+                                                for extra mealtime flexibility. These delicious, ready-to-heat options
+                                                can
+                                                help
+                                                you
+                                                bulk up existing meals, simplify home cooking, or even build an entire
+                                                meal—the
+                                                choice
+                                                is yours!
+                                            </p>
+                                            <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or
+                                                lunches!) a
+                                                week. On average, our meals weigh in at about 13 ounces and range from
+                                                300
+                                                to
+                                                650
+                                                calories. If you have a larger household, we do offer a 12 meal per week
+                                                subscription (it's
+                                                perfect for couples or a family of 4 looking for 3 meals per week).
+                                                Plus,
+                                                you
+                                                can always
+                                                order multiple subscriptions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!--Meals Section-->
+        <h3 class="steps-heading">Meals</h3>
+        <section class="meals-section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-md-8 col-lg-9 px-3">
+                        <div class="row pt-1" id="meals"></div>
+                        <div class="row position-relative">
+                            <div class="empty-cart d-flex d-md-none flex-column position-fixed bottom-0 bg-white">
+                                <div id="cart-content" class="col-12 d-flex flex-column border-0 col-12 pt-2 d-none">
+                                    <div class="d-flex justify-content-center my-3">
+                                        <img id="cart-down" class="img-fluid" src="assets/images/arrow_forward.svg"
+                                            alt="arrow">
+                                    </div>
+                                    <div
+                                        class="d-flex align-items-center justify-content-between border-bottom py-2 px-1">
+                                        <p class="delivery-day my-auto"></p>
+                                        <p class="clear my-auto text-decoration-underline text-primary" href="#">
+                                            Clear all</p>
+                                    </div>
+                                    <div class="cart-body">
+                                        <div class="cart-body-content">
+                                            <div class="cart-items d-flex flex-column gap-1"></div>
+                                            <div id="cart-summary" class="d-flex flex-column gap-2 px-2 pt-4 summary">
+                                                <strong>Order Summary</strong>
+                                                <div class="d-flex flex-row justify-content-between w-100">
+                                                    <p class="m-0 cart-meals-count"></p>
+                                                    <p class="cart-meals-price m-0"></p>
+                                                </div>
+                                                <div class="d-flex flex-row justify-content-between w-100">
+                                                    <p class="m-0">Subtotal</p>
+                                                    <p class="cart-sub-total m-0 fw-bold"></p>
+                                                </div>
+                                                <p id="tax-msg" class="text-center">Tax and shipping calculated at
+                                                    checkout</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column border-top pt-3 text-center">
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="d-flex justify-content-between w-100 px-2">
+                                            <div class="sub-total">Subtotal <span class="text-highlight fw-bold">$<span
+                                                        class="sub-total-text"></span></span>
+                                            </div>
+                                            <div id="cart-up" class="d-flex gap-1 border rounded-pill px-3">
+                                                <img src="assets/images/cart-icon.svg" alt="cart-icon">
+                                                <span class="cart-count text-highlight fw-bold">0</span>
+                                            </div>
+                                        </div>
+                                        <button class="cart-next-btn text-white w-100 py-2 text-white">Next</button>
+                                        <p class="meal-left text-highlight"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="empty-cart d-none d-md-flex col-md-4 col-lg-3 px-2 position-fixed shadow-dark shadow border border-top-0 custom-card">
+                        <div class="d-flex flex-column h-100 col-12">
+                            <div class="d-flex align-items-center justify-content-between border-bottom py-2 px-1">
+                                <p class="delivery-day my-auto"></p>
+                                <p class="clear my-auto text-decoration-underline text-primary" href="#">Clear all</p>
+                            </div>
+                            <div class="cart-body">
+                                <div class="cart-body-content">
+                                    <div class="cart-items d-flex flex-column gap-1"></div>
+                                    <div id="cart-summary" class="d-flex flex-column gap-2 px-2 pt-4 summary">
+                                        <strong>Order Summary</strong>
+                                        <div class="d-flex flex-row justify-content-between w-100">
+                                            <p class="m-0 cart-meals-count"></p>
+                                            <p class="cart-meals-price m-0"></p>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between w-100">
+                                            <p class="m-0">Subtotal</p>
+                                            <p class="cart-sub-total m-0 fw-bold"></p>
+                                        </div>
+                                        <p id="tax-msg" class="text-center">Tax and shipping calculated at checkout</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column gap-3 border-top pt-3 text-center">
+                                <div class="d-flex justify-content-between w-100 px-2">
+                                    <div class="sub-total">Subtotal <span class="text-highlight fw-bold">$<span
+                                                class="sub-total-text"></span></span></div>
+                                    <div
+                                        class="d-flex justify-content-center align-items-center gap-1 border rounded-pill px-3 py-1">
+                                        <img src="assets/images/cart-icon.svg" width="17" height="17" alt="cart-icon">
+                                        <span class="cart-count text-highlight fw-bold">0</span>
+                                    </div>
+                                </div>
+                                <button class="cart-next-btn text-white w-100 py-2">Next</button>
+                                <p class="meal-left text-highlight"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!--Checkout Section-->
+        <h3 class="steps-heading">Checkout</h3>
+        <section class="checkout-section">
+            <div id="checkout-details" class="container-fluid pb-2">
+                <div class="container py-4 pt-3">
+                    <div class="row d-flex flex-column-reverse flex-lg-row justify-content-center gap-lg-3">
+                        <div class="col-12 col-lg-6 ps-lg-5">
+                            <h4 class="px-2 pt-5 p-lg-0">Checkout</h4>
+                            <div class="bg-white border mt-4">
+                                <form class="bg-white py-4 pb-5 px-5 d-flex flex-column gap-3">
+                                    <h5>Delivery Address</h5>
+                                    <div class="d-flex flex-row gap-3">
+                                        <div class="d-flex flex-column w-100">
+                                            <label for="fname" class="form-label fw-bold">First Name</label>
+                                            <input id="fname" type="text" class="form-control">
+                                            <span id="fname-req" class="text-danger small d-none">* First Name is
+                                                Required</span>
+                                            <span id="fname-error" class="text-danger small d-none">* Should be
+                                                characters
+                                                only</span>
+
+                                        </div>
+                                        <div class="d-flex flex-column w-100">
+                                            <label for="lname" class="form-label fw-bold">Last Name</label>
+                                            <input id="lname" type="text" class="form-control">
+                                            <span id="lname-req" class="text-danger small d-none">* Last Name is
+                                                Required</span>
+                                            <span id="lname-error" class="text-danger small d-none">* Should be
+                                                characters
+                                                only</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column w-100">
+                                        <label for="name" class="form-label fw-bold">Full Name for Delivery
+                                            Address</label>
+                                        <input id="name" type="text" class="form-control">
+                                        <span id="name-req" class="text-danger small d-none">* Full Name is
+                                            Required</span>
+                                        <span id="name-error" class="text-danger small d-none">* Should be characters
+                                            only</span>
+                                    </div>
+                                    <div class="d-flex flex-column w-100">
+                                        <label for="line1" class="form-label fw-bold">Address Line 1</label>
+                                        <input id="line1" type="text" class="form-control">
+                                        <span id="line1-req" class="text-danger small d-none">* Address Line 1 is
+                                            Required</span>
+                                    </div>
+                                    <div class="d-flex flex-column w-100">
+                                        <label for="line2" class="form-label fw-bold">Address Line 2 (optional)</label>
+                                        <input id="line2" type="text" class="form-control">
+                                    </div>
+                                    <div class="d-flex flex-row gap-3">
+                                        <div class="d-flex flex-column w-100">
+                                            <label for="city" class="form-label fw-bold">City</label>
+                                            <input id="city" type="text" class="form-control">
+                                            <span id="city-req" class="text-danger small d-none">* City is
+                                                Required</span>
+                                            <span id="city-error" class="text-danger small d-none">* Should be
+                                                characters
+                                                only</span>
+                                        </div>
+                                        <div class="d-flex flex-column w-75">
+                                            <label for="state" class="form-label fw-bold">State</label>
+                                            <input id="state" type="text" class="form-control">
+                                            <span id="state-req" class="text-danger small d-none">* State is
+                                                Required</span>
+                                            <span id="state-error" class="text-danger small d-none">* Should be
+                                                characters
+                                                only</span>
+                                        </div>
+                                        <div class="d-flex flex-column w-50">
+                                            <div class="d-flex flex-row gap-2">
+                                                    <label for="zip" class="form-label fw-bold">Zip</label>
+                                                    <a href="#" class="fs-0">change</a>
+                                            </div>
+                                            <input id="zip" type="text" class="form-control">
+
+                                            <span id="zip-req" class="text-danger small d-none">* Zip is Required</span>
+                                            <span id="zip-error" class="text-danger small d-none">* Should be digits
+                                                only</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column w-100">
+                                        <label for="phone" class="form-label fw-bold">Phone</label>
+                                        <input id="phone" type="text" class="form-control">
+                                        <span id="phone-req" class="text-danger small d-none">* Phone is Required</span>
+                                        <span id="phone-error" class="text-danger small d-none">* Should be 11 digits
+                                            only</span>
+                                    </div>
+                                    <div class="d-flex flex-row w-100 form-check gap-2">
+                                        <input id="checkbox" type="checkbox" class="form-check-input">
+                                        <label for="checkbox" class="form-check-label">Receive SMS text message updates
+                                            on
+                                            my
+                                            orders</label>
+                                    </div>
+                                    <div class="d-flex flex-column w-100">
+                                        <label for="email" class="form-label fw-bold">Email (We require your email to
+                                            send
+                                            you receipts and order updates)</label>
+                                        <input id="email" type="text" class="form-control">
+                                        <span id="email-req" class="text-danger small d-none">* Email is Required</span>
+                                        <span id="email-error" class="text-danger small d-none">* Should be valid
+                                            email</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex w-100">
+                                        <button id="checkout-btn" type="button"
+                                            class="btn w-100 text-white">Checkout</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 pe-lg-2">
+                            <h4 class="px-2 pt-5 p-lg-0">Order Summary</h4>
+                            <div class="bg-white mt-4">
+                                <div class="d-flex flex-column border">
+                                    <div class="d-flex justify-content-between border-bottom p-2">
+                                        <label for="promo-input"><a id="promo-code" href="#"> + Add Promo
+                                                Code</a></label>
+                                        <input id="promo-input" class="form-control d-none"
+                                            placeholder="Enter Promo code (1-50)" type="text">
+                                    </div>
+                                    <div class="d-flex flex-column border-bottom p-2 pb-3">
+                                        <span class="fw-bold">Delivery Date</span>
+                                        <span class="border border-dark rounded px-3 py-1"
+                                            id="checkout-delivery"></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between border-bottom p-2">
+                                        <span>Meals</span>
+                                        <span id="order-price" class="fw-bold"></span>
+                                    </div>
+                                    <div id="discount" class="d-flex justify-content-between border-bottom p-2 d-none">
+                                    </div>
+                                    <div class="d-flex justify-content-between border-bottom p-2">
+                                        <span>Shipping</span>
+                                        <span class="fw-bold">$8.99</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between border-bottom p-2">
+                                        <span>Tax</span>
+                                        <span class="fw-bold">$10.99</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2">
+                                        <span class="fw-bold">Total</span>
+                                        <span id="order-total" class="text-danger fw-bold"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="py-3 pt-4">My Meals</h4>
+                            <div class="bg-white">
+                                <div id="checkout-cart" class="d-flex flex-column"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container py-5 mb-5">
+                <hr>
+                <h1 class="text-center pt-5 pb-2">Common Questions</h1>
+                <div class="row mx-auto d-flex flex-column justify-content-center align-items-center">
+                    <div class="col-12 col-md-10">
+                        <div class="accordion" id="common-questions">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-1">
+                                        How many servings are your meals?
+                                    </button>
+                                </h2>
+                                <div id="question-1" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-2">
+                                        Do you accommodate dietary preferences?
+                                    </button>
+                                </h2>
+                                <div id="question-2" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-3">
+                                        How long do the meals last?
+                                    </button>
+                                </h2>
+                                <div id="question-3" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-4">
+                                        How do I heat up my meals?
+                                    </button>
+                                </h2>
+                                <div id="question-4" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-5">
+                                        How does shipping work?
+                                    </button>
+                                </h2>
+                                <div id="question-5" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-6">
+                                        How does the subscription work?
+                                    </button>
+                                </h2>
+                                <div id="question-6" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-7">
+                                        How does shipping work?
+                                    </button>
+                                </h2>
+                                <div id="question-7" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#question-8">
+                                        How does the subscription work?
+                                    </button>
+                                </h2>
+                                <div id="question-8" class="collapse" data-bs-parent="#common-questions">
+                                    <div class="accordion-body">
+                                        <p>The majority of our meals are single serving and meant to feed an average
+                                            adult.
+                                            We also offer multi-serve proteins and sides, which are designed to feed
+                                            multiple people
+                                            for extra mealtime flexibility. These delicious, ready-to-heat options can
+                                            help
+                                            you
+                                            bulk up existing meals, simplify home cooking, or even build an entire
+                                            meal—the
+                                            choice
+                                            is yours!
+                                        </p>
+                                        <p>Our 6-meal plan is perfect for a person looking for 6 dinners (or lunches!) a
+                                            week. On average, our meals weigh in at about 13 ounces and range from 300
+                                            to
+                                            650
+                                            calories. If you have a larger household, we do offer a 12 meal per week
+                                            subscription (it's
+                                            perfect for couples or a family of 4 looking for 3 meals per week). Plus,
+                                            you
+                                            can always
+                                            order multiple subscriptions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

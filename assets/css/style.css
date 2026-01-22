@@ -9,7 +9,9 @@
     --btn-right: #533174;
     --heading: #333333;
     --highlight: #D75D33;
-    --dark: #000000;
+    --dark-color: #000000;
+    --link-color: #0D6EFD;
+    --heading-color: #333333;
 }
 
 * {
@@ -18,24 +20,60 @@
 
 body {
     font-family: roboto;
-}
-
-/*Navbar */
-.breadcrumb-item+.breadcrumb-item::before {
-    content: ">";
-    padding: 0 0.8rem;
-}
-
-li.breadcrumb-item {
-    font-size: 14px;
-}
-
-/* Plans Section*/
-.plans-section,
-.day-section, .checkout-section {
     background-color: var(--bg-color);
 }
 
+/*---------------Navbar usign jQuery Steps-------------------*/
+#wizard .steps li a {
+    color: var(--dark-color);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s, font-weight 0.3s;
+    font-weight: 360;
+}
+
+#wizard .steps li a:hover{
+    text-decoration: underline;
+}
+
+#wizard .steps li.current a {
+    color: var(--link-color);
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+#wizard .steps ul {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    border-bottom: 1px solid gainsboro;
+}
+
+#wizard .steps {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+#wizard .steps li+li::before {
+    padding: 0 0.8rem;
+    content: ">";
+}
+
+#wizard li {
+    list-style: none;
+    font-size: 14px;
+}
+
+#wizard .steps .number,
+#wizard .steps .current span,
+#wizard .steps-heading {
+    display: none;
+}
+
+/*--------------------Plans Section-----------------------*/
 .plans-section h2.heading {
     font-size: 36px;
 }
@@ -72,6 +110,8 @@ li.breadcrumb-item {
 
 .plans-section p.heading {
     font-size: 16px;
+    font-weight: 360;
+
 }
 
 .plans-section .meals {
@@ -129,20 +169,53 @@ li.breadcrumb-item {
     font-size: 14px;
 }
 
+.plans-section{
+    font-weight: 380;
+}
+
+@media screen and (min-width: 577px) {
+    .plans-section .btn {
+        width: 24%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .plans-section .meals {
+        font-size: 24px;
+    }
+
+    .plans-section .btn {
+        width: 15%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .plans-section .btn {
+        width: 11%;
+        height: 45px;
+    }
+
+    .plans-section .btn:hover {
+        width: 26%;   
+    }
+}
+
+
 /* Day Section*/
 .day-section h2.heading,
 .day-section h1 {
     font-size: 48px;
+    color: var(--heading-color);
 }
 
 .day-section .table-container {
-    height: 278px;
+    height: 330px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
 .day-section .scroll {
-    width: 15px;
+    width: 8px;
     background-color: #F9F9F9;
 }
 
@@ -162,6 +235,10 @@ tr {
 
 .day-section tr {
     cursor: pointer;
+}
+
+.day-section td {
+    padding: 12px 0;
 }
 
 .day-section tr:hover {
@@ -357,4 +434,7 @@ tr {
 /*Checkout Section */
 .checkout-section .desc{
     font-size: 13px;
+}
+.checkout-section #checkout-btn{
+    height: 47px;
 }
