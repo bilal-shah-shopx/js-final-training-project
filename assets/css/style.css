@@ -7,11 +7,19 @@
     --bg-color: #FFFDF7;
     --btn-left: #AF2081;
     --btn-right: #533174;
-    --heading: #333333;
-    --highlight: #D75D33;
+    --highlight-color: #D75D33;
     --dark-color: #000000;
     --link-color: #0D6EFD;
     --heading-color: #333333;
+    --light-color: #ffffff;
+    --border-color: #FFC107;
+    --light-border-color: gainsboro;
+    --scroll-bg-color: #F9F9F9;
+    --bg-color-secondary: #CCCCCC;
+    --card-bg-color: #DFDFDF;
+    --custom-card-bg-color: #F3F3F3;
+    --desc-color: #707070;
+    --disabled-icon-color: #717171;
 }
 
 * {
@@ -44,11 +52,12 @@ body {
 }
 
 #wizard .steps ul {
-    background-color: white;
+    background-color: var(--light-color);
     display: flex;
     justify-content: center;
     padding: 20px 0;
-    border-bottom: 1px solid gainsboro;
+    border-bottom: 1px solid var(--light-border-color);
+    margin-bottom: 0rem;
 }
 
 #wizard .steps {
@@ -81,8 +90,8 @@ body {
 .plans-section .logo {
     width: 100%;
     max-width: 80px;
-    height: auto;
-    min-height: 80px;
+    height: 100%;
+    max-height: 80px;
 }
 
 .plans-section .btn,
@@ -90,7 +99,7 @@ body {
     background-image: linear-gradient(to right, var(--btn-left), var(--btn-right));
     font-size: 16px;
     width: 100%;
-    transition: width 0.5s ease;
+    transition: max-width 0.5s ease;
 }
 
 .plans-section .btn,
@@ -105,37 +114,35 @@ body {
 }
 
 .plans-section .heading {
-    color: var(--heading);
+    color: var(--heading-color);
 }
 
 .plans-section p.heading {
-    font-size: 16px;
     font-weight: 360;
-
 }
 
 .plans-section .meals {
     font-size: 20px;
 }
 
-.plans-section .per-week {
-    font-size: 14px;
-}
-
+.day-section .btn,
+.plans-section p.heading,
 .plans-section .plan-price,
 .plans-section .per-meal,
-.plans-section .meals-img span {
+.plans-section .meals-img span,
+.custom-card .add-btn,
+.custom-card .cart-next-btn,
+.cart-count,
+.sub-total {
     font-size: 16px;
-
 }
 
 .plans-section .price {
-    color: var(--highlight);
+    color: var(--highlight-color-color);
     font-weight: 600;
 }
 
 .plans-section .meals-img span {
-    position: absolute;
     top: 7px;
     left: 7px;
     font-size: 12px;
@@ -143,7 +150,6 @@ body {
 }
 
 .plans-section .meals-img {
-    position: relative;
     overflow: hidden;
     border-radius: 16px;
 }
@@ -156,16 +162,24 @@ body {
     transform: scale(1.1);
 }
 
-.plans-section .plan {
+.plans-section .plan,
+.day-section tr,
+.custom-card .fa-plus,
+.custom-card .fa-minus,
+.custom-card .clear  {
     cursor: pointer;
 }
 
 .plans-section .selected-plan {
     border-radius: 19px;
-    border: 1px solid #FFC107;
+    border: 1px solid var(--border-color);
 }
 
-.plans-section .shipping {
+.plans-section .shipping, .plans-section .per-week,
+.custom-card .title,
+.custom-card .summary,
+.day-section .date,
+.meals-section .title {
     font-size: 14px;
 }
 
@@ -175,7 +189,7 @@ body {
 
 @media screen and (min-width: 577px) {
     .plans-section .btn {
-        width: 24%;
+        max-width: 24%;
     }
 }
 
@@ -185,21 +199,21 @@ body {
     }
 
     .plans-section .btn {
-        width: 15%;
+        max-width: 15%;
     }
 }
 
 @media screen and (min-width: 1200px) {
     .plans-section .btn {
-        width: 11%;
-        height: 45px;
+        max-width: 11%;
+        height: 100%;
+        max-height: 45px;
     }
 
     .plans-section .btn:hover {
-        width: 26%;   
+        max-width: 26%;   
     }
 }
-
 
 /* Day Section*/
 .day-section h2.heading,
@@ -209,18 +223,20 @@ body {
 }
 
 .day-section .table-container {
-    height: 330px;
+    height: 100%;
+    max-height: 330px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
 .day-section .scroll {
-    width: 8px;
-    background-color: #F9F9F9;
+    width: 100%;
+    max-width: 8px;
+    background-color: var(--scroll-bg-color);
 }
 
 .day-section .selected-day {
-    border-left: 8px solid var(--highlight);
+    border-left: 8px solid var(--highlight-color);
 }
 
 body,
@@ -229,12 +245,8 @@ tfoot,
 th,
 thead,
 tr {
-    border-color: black;
+    border-color: var(--dark-color);
     border-right: 0;
-}
-
-.day-section tr {
-    cursor: pointer;
 }
 
 .day-section td {
@@ -243,10 +255,6 @@ tr {
 
 .day-section tr:hover {
     transform: translateX(5px);
-}
-
-.day-section .date {
-    font-size: 14px;
 }
 
 .day-section .popular {
@@ -260,15 +268,7 @@ tr {
 }
 
 .day-section .popular-text {
-    color: var(--highlight);
-    font-size: 12px;
-}
-
-.day-section .btn {
-    font-size: 16px;
-}
-
-.day-section .footer-text {
+    color: var(--highlight-color);
     font-size: 12px;
 }
 
@@ -294,7 +294,7 @@ tr {
 }
 
 .accordion-button:not(.collapsed) {
-    color: var(--highlight);
+    color: var(--highlight-color);
     box-shadow: none;
     background-color: var(--bg-color);
 }
@@ -313,12 +313,12 @@ tr {
 }
 
 .accordion-header {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--bg-color-secondary);
 }
 
-/* Meals Section*/
+/* Meals Section */
 .meals-section .card {
-    border-color: #DFDFDF;
+    border-color: var(--card-bg-color);
     border-radius: 0;
 }
 
@@ -331,18 +331,14 @@ tr {
     border: none;
 }
 
-.meals-section .title {
-    font-size: 14px;
-}
-
 .meals-section .desc {
     font-size: 12px;
-    color: #707070;
+    color: var(--desc-color);
 }
 
 .meals-section .featured, .checkout-section .featured {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--dark-color);
+    color: var(--light-color);
 }
 
 .meals-section .card-img-top, .checkout-section .card-img-top {
@@ -354,7 +350,7 @@ tr {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: var(--highlight);
+    background-color: var(--highlight-color);
 }
 
 .border-top {
@@ -362,7 +358,8 @@ tr {
 }
 
 .custom-card {
-    height: 91.5vh;
+    height: 100%;
+    max-height: 91.5vh;
     right: 0;
 }
 
@@ -372,27 +369,26 @@ tr {
 }
 
 .custom-card .card {
-    background-color: #F3F3F3;
+    background-color: var(--custom-card-bg-color);
 }
 
-.custom-card .fa-plus,
-.custom-card .fa-minus {
-    color: #717171;
+.custom-card .fa-plus .disabled,
+.custom-card .fa-minus .disabled{
+    color: var(--disabled-icon-color);
 }
 
 .divider {
     content: "";
     top: 10%;
     right: 0;
-    height: 80%;
-    width: 1px;
-    background-color: #ccc;
+    height: 100%;
+    max-height: 80%;
+    width: 100%;
+    max-width: 1px;
+    background-color: var(--bg-color-secondary);
 }
 
-.clear {
-    cursor: pointer;
-}
-
+.day-section .footer-text,
 .custom-card .delivery-day,
 .custom-card #tax-msg,
 .custom-card .clear,
@@ -401,25 +397,8 @@ tr {
     font-size: 12px;
 }
 
-.custom-card .title,
-.custom-card .summary {
-    font-size: 14px;
-}
-
-.custom-card .add-btn,
-.custom-card .cart-next-btn,
-.cart-count,
-.sub-total {
-    font-size: 16px;
-}
-
 .text-highlight {
-    color: var(--highlight);
-}
-
-.custom-card .fa-plus,
-.custom-card .fa-minus {
-    cursor: pointer;
+    color: var(--highlight-color);
 }
 
 .meals-section .disabled{
@@ -436,5 +415,6 @@ tr {
     font-size: 13px;
 }
 .checkout-section #checkout-btn{
-    height: 47px;
+    height: 100%;
+    max-height: 47px;
 }

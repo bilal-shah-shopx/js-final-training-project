@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    // 1. Initialize the wizard with pagination disabled
-    let wizard = $("#wizard").steps({
+
+    /* jQuery-steps */
+    const wizard = $("#wizard").steps({
         headerTag: "h3",
         bodyTag: "section",
         transitionEffect: "slideLeft",
@@ -10,175 +11,313 @@ $(document).ready(function () {
     $("#wizard .steps li").removeClass("current");
     $("#wizard .steps li:first").addClass("current");
 
-    // Plans Section
-    function Plan(count, planPrice, price) {
-        this.count = count;
-        this.planPrice = planPrice;
-        this.price = price
+    /* Local Storage */
+    const STORAGE_KEY = 'freshlyOrderState';
+
+    let STATE = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+        planId: null,
+        dayId: null,
+        meals: {},
+        promoCode: null
+    };
+
+    function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
     }
 
+    function resetMeals() {
+        STATE.meals = {};
+        STATE.promoCode = null;
+        saveState();
+    }
+
+    function resetPromoCode() {
+        STATE.promoCode = null;
+        saveState();
+    }
+
+    function resetState() {
+        STATE.planId = null;
+        STATE.dayId = null;
+        STATE.meals = {};
+        STATE.promoCode = null;
+        saveState();
+    }
+
+    /* Plans Section */
     const plansDetail = {
-        'plan-1': new Plan(4, 56, 11.49),
-        'plan-2': new Plan(6, 84, 9.49),
-        'plan-3': new Plan(10, 140, 8.99),
-        'plan-4': new Plan(12, 168, 8.49)
+        'plan-1': { count: 4, planPrice: 56, price: 11.49 },
+        'plan-2': { count: 6, planPrice: 84, price: 9.49 },
+        'plan-3': { count: 10, planPrice: 140, price: 8.99 },
+        'plan-4': { count: 12, planPrice: 168, price: 8.49 }
+    };
+
+
+    function resetPlan() {
+        $("#start-btn").addClass('disabled');
+        $('#' + STATE.planId).removeClass('selected-plan');
     }
 
-    let selectedPlanId = '';
-    const userPlan = localStorage.getItem('selectedPlanId');
-    if (userPlan !== null && plansDetail[userPlan] !== undefined) {
-        selectedPlanId = userPlan;
-        $(`#${selectedPlanId}`).addClass('selected-plan');
+    if (STATE.planId) {
+        $('#' + STATE.planId).addClass('selected-plan');
+        $('#start-btn').removeClass('disabled');
     }
     else {
         $("#start-btn").addClass('disabled');
     }
 
     $('.plan').each(function () {
-        const plan = this;
-        const planData = plansDetail[plan.id];
-        const { count, planPrice, price } = planData;
-        $(plan).find('.count').text(count);
-        $(plan).find('.price').text('$' + planPrice);
-        $(plan).find('.per-price').text(price);
-        $(plan).on('click', function () {
-            $('.plan').removeClass('selected-plan');
-            $(this).addClass('selected-plan');
-            selectedPlanId = plan.id;
-            const prevPlan = localStorage.getItem('selectedPlanId');
-            if (!prevPlan || prevPlan != selectedPlanId) {
-                localStorage.removeItem('selectedDay');
-                localStorage.removeItem('totalItems');
-                localStorage.removeItem('subTotal');
-                localStorage.removeItem('mealPrice');
-            }
-            localStorage.setItem('selectedPlanId', selectedPlanId);
-            $("#start-btn").removeClass('disabled');
-        });
+        const { count, planPrice, price } = plansDetail[this.id];
+        $(this).find('.count').text(count);
+        $(this).find('.price').text('$' + planPrice);
+        $(this).find('.per-price').text(price);
     });
 
-    $("#start-btn").on("click", function () {
-        if (selectedPlanId) {
-            localStorage.setItem('selectedPlanId', selectedPlanId);
-            wizard.steps("next");
+    $('.plan').on('click', function () {
+        const newPlan = this.id;
+
+        if (STATE.planId && STATE.planId !== newPlan) {
+            resetMeals();
         }
+
+        $('.plan').removeClass('selected-plan');
+        $(this).addClass('selected-plan');
+
+        STATE.planId = newPlan;
+        saveState();
+        renderCart();
+        renderCheckout();
+        $('#start-btn').removeClass('disabled');
     });
 
-    // Day Section  
-    function Day(day, month, date) {
-        this.day = day;
-        this.month = month;
-        this.date = date
-    }
+    $('#start-btn').on('click', () => wizard.steps('next'));
 
+    /* Day Section */
+    const daysDetail = {};
     let today = new Date();
-
-    // get the first day is monday
     do {
         today.setDate(today.getDate() + 1);
     } while (today.getDay() !== 1);
 
-    const getDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const getMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    const daysDetail = {};
+    const dNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     for (let i = 1; i <= 10; i++) {
-        daysDetail[`day-${i}`] = new Day(getDay[today.getDay()], getMonth[today.getMonth()], today.getDate());
+        daysDetail[`day-${i}`] = {
+            day: dNames[today.getDay()],
+            month: mNames[today.getMonth()],
+            date: today.getDate()
+        };
         today.setDate(today.getDate() + 1);
     }
 
-    let selectedDay = '';
-    const userDay = localStorage.getItem('selectedDay');
-    if (userDay !== null && daysDetail[userDay] !== undefined) {
-        selectedDay = userDay;
+    function resetDay() {
+        const { day, month, date } = daysDetail['day-1'];
+        $('#delivery-date').html(`<strong>${day}</strong>, ${month} ${date}`);
+        $('.day').removeClass('selected-day');
+        $('#day-1').addClass('selected-day');
     }
-    else {
-        selectedDay = 'day-1';
-        localStorage.setItem('selectedDay', selectedDay);
-    }
-    $(`#${selectedDay}`).addClass('selected-day');
-    const { day, month, date } = daysDetail[selectedDay];
+
+    if (!STATE.dayId) STATE.dayId = 'day-1';
+    const { day, month, date } = daysDetail[STATE.dayId];
     $('#delivery-date').html(`<strong>${day}</strong>, ${month} ${date}`);
-
-    const days = document.querySelectorAll('.day');
-    days.forEach(eachDay => {
-        let eachDate = eachDay.querySelector('.date');
-        const { day, month, date } = daysDetail[eachDay.id];
-        eachDate.innerHTML = `<strong>${day}</strong>, ${month} ${date}`;
-        eachDay.addEventListener('click', function () {
-            days.forEach(d => d.classList.remove('selected-day'));
-            $('#delivery-date').html(`<strong>${day}</strong>, ${month} ${date}`);
-            eachDay.classList.add('selected-day');
-            selectedDay = eachDay.id;
-            localStorage.setItem('selectedDay', selectedDay);
-        });
+    $('.day').each(function () {
+        const d = daysDetail[this.id];
+        $(this).find('.date').html(`<strong>${d.day}</strong>, ${d.month} ${d.date}`);
+        if (this.id === STATE.dayId) $(this).addClass('selected-day');
     });
 
-    $("#next-btn").on("click", function () {
-        localStorage.setItem('selectedDay', selectedDay);
-        wizard.steps("next");
+    $('.day').on('click', function () {
+        $('.day').removeClass('selected-day');
+        const { day, month, date } = daysDetail[this.id];
+        $('#delivery-date').html(`<strong>${day}</strong>, ${month} ${date}`);
+        $(this).addClass('selected-day');
+        STATE.dayId = this.id;
+        renderCart();
+        renderCheckout();
+        saveState();
     });
 
-    // Meals Section
-    let totalItems = 0;
-    let perMealPrice = 0;
-    let extras = 0;
-    let totalCartItems = 0;
-    let mealsCountDetail = {};
-    const mealsLength = 24;
+    $('#next-btn').on('click', () => wizard.steps('next'));
 
-    function setPrice() {
-        const userPlan = localStorage.getItem('selectedPlanId');
-        if (userPlan !== null && plansDetail[userPlan] !== undefined) {
-            selectedPlan = userPlan;
-        }
-        else {
-            selectedPlan = 'plan-1';
-        }
-        const { count, price } = plansDetail[selectedPlan];
-        totalItems = count;
-        perMealPrice = price;
+    /* Meals Section */
+    let price = 0;
+    if (STATE.planId) {
+        price = plansDetail[STATE.planId];
     }
-    setPrice();
-
-    function Meal(name, desc, imgUrl, extraPrice = 0, price = perMealPrice) {
-        this.name = name;
-        this.desc = desc;
-        this.imgUrl = imgUrl;
-        this.extraPrice = extraPrice;
-        this.price = price;
-    }
-
     const mealsDetail = {
-        'meal-1': new Meal('Mix Veggies', 'with Cabbage, Carrots & Chicken', 'assets/images/1.png'),
-        'meal-2': new Meal('Protein-Packed Chicken Salad', 'with Fruits & Seeds', 'assets/images/2.png'),
-        'meal-3': new Meal('Super-Grain Snacks Bowl', 'with Avocado & Veggies', 'assets/images/3.png', 11.49),
-        'meal-4': new Meal('Stir Fried Rice Noodles Bowl', 'with Mushroom & Spanish Pepper', 'assets/images/4.png'),
-        'meal-5': new Meal('Cauliflower Pilaf', 'with Chickpea & Cheese', 'assets/images/5.png'),
-        'meal-6': new Meal('Keto-Friendly Pasta Bowl', 'with Tina & Spanish', 'assets/images/6.png'),
-        'meal-7': new Meal('Vegetable Soup Bowl', 'with Chicken & Sweet Kabu', 'assets/images/7.png'),
-        'meal-8': new Meal('Kashmiri Rice', 'with Chicken & Coconut', 'assets/images/8.png'),
-        'meal-9': new Meal('Mix Veggies', 'with Cabbage, Carrots & Chicken', 'assets/images/1.png'),
-        'meal-10': new Meal('Super-Grain Snacks Bowl', 'with Avocado & Veggies', 'assets/images/3.png', 1.49),
-        'meal-11': new Meal('Protein-Packed Chicken Salad', 'with Fruits & Seeds', 'assets/images/2.png'),
-        'meal-12': new Meal('Stir Fried Rice Noodles Bowl', 'with Mushroom & Spanish Pepper', 'assets/images/4.png'),
-        'meal-13': new Meal('Cauliflower Pilaf', 'with Chickpea & Cheese', 'assets/images/5.png'),
-        'meal-14': new Meal('Keto-Friendly Pasta Bowl', 'with Tina & Spanish', 'assets/images/6.png'),
-        'meal-15': new Meal('Vegetable Soup Bowl', 'with Chicken & Sweet Kabu', 'assets/images/7.png'),
-        'meal-16': new Meal('Kashmiri Rice', 'with Chicken & Coconut', 'assets/images/8.png'),
-        'meal-17': new Meal('Mix Veggies', 'with Cabbage, Carrots & Chicken', 'assets/images/1.png'),
-        'meal-18': new Meal('Protein-Packed Chicken Salad', 'with Fruits & Seeds', 'assets/images/2.png'),
-        'meal-19': new Meal('Keto-Friendly Pasta Bowl', 'with Tina & Spanish', 'assets/images/6.png'),
-        'meal-20': new Meal('Stir Fried Rice Noodles Bowl', 'with Mushroom & Spanish Pepper', 'assets/images/4.png'),
-        'meal-21': new Meal('Cauliflower Pilaf', 'with Chickpea & Cheese', 'assets/images/5.png'),
-        'meal-22': new Meal('Super-Grain Snacks Bowl', 'with Avocado & Veggies', 'assets/images/3.png', 1.49),
-        'meal-23': new Meal('Vegetable Soup Bowl', 'with Chicken & Sweet Kabu', 'assets/images/7.png'),
-        'meal-24': new Meal('Kashmiri Rice', 'with Chicken & Coconut', 'assets/images/8.png'),
-    }
+        'meal-1': {
+            name: 'Mix Veggies',
+            desc: 'with Cabbage, Carrots & Chicken',
+            imgUrl: 'assets/images/1.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-2': {
+            name: 'Protein-Packed Chicken Salad',
+            desc: 'with Fruits & Seeds',
+            imgUrl: 'assets/images/2.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-3': {
+            name: 'Super-Grain Snacks Bowl',
+            desc: 'with Avocado & Veggies',
+            imgUrl: 'assets/images/3.png',
+            extraPrice: 11.49,
+            price: price,
+        },
+        'meal-4': {
+            name: 'Stir Fried Rice Noodles Bowl',
+            desc: 'with Mushroom & Spanish Pepper',
+            imgUrl: 'assets/images/4.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-5': {
+            name: 'Cauliflower Pilaf',
+            desc: 'with Chickpea & Cheese',
+            imgUrl: 'assets/images/5.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-6': {
+            name: 'Keto-Friendly Pasta Bowl',
+            desc: 'with Tina & Spanish',
+            imgUrl: 'assets/images/6.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-7': {
+            name: 'Vegetable Soup Bowl',
+            desc: 'with Chicken & Sweet Kabu',
+            imgUrl: 'assets/images/7.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-8': {
+            name: 'Kashmiri Rice',
+            desc: 'with Chicken & Coconut',
+            imgUrl: 'assets/images/8.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-9': {
+            name: 'Mix Veggies',
+            desc: 'with Cabbage, Carrots & Chicken',
+            imgUrl: 'assets/images/1.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-10': {
+            name: 'Super-Grain Snacks Bowl',
+            desc: 'with Avocado & Veggies',
+            imgUrl: 'assets/images/3.png',
+            extraPrice: 1.49,
+            price: price,
+        },
+        'meal-11': {
+            name: 'Protein-Packed Chicken Salad',
+            desc: 'with Fruits & Seeds',
+            imgUrl: 'assets/images/2.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-12': {
+            name: 'Stir Fried Rice Noodles Bowl',
+            desc: 'with Mushroom & Spanish Pepper',
+            imgUrl: 'assets/images/4.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-13': {
+            name: 'Cauliflower Pilaf',
+            desc: 'with Chickpea & Cheese',
+            imgUrl: 'assets/images/5.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-14': {
+            name: 'Keto-Friendly Pasta Bowl',
+            desc: 'with Tina & Spanish',
+            imgUrl: 'assets/images/6.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-15': {
+            name: 'Vegetable Soup Bowl',
+            desc: 'with Chicken & Sweet Kabu',
+            imgUrl: 'assets/images/7.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-16': {
+            name: 'Kashmiri Rice',
+            desc: 'with Chicken & Coconut',
+            imgUrl: 'assets/images/8.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-17': {
+            name: 'Mix Veggies',
+            desc: 'with Cabbage, Carrots & Chicken',
+            imgUrl: 'assets/images/1.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-18': {
+            name: 'Protein-Packed Chicken Salad',
+            desc: 'with Fruits & Seeds',
+            imgUrl: 'assets/images/2.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-19': {
+            name: 'Keto-Friendly Pasta Bowl',
+            desc: 'with Tina & Spanish',
+            imgUrl: 'assets/images/6.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-20': {
+            name: 'Stir Fried Rice Noodles Bowl',
+            desc: 'with Mushroom & Spanish Pepper',
+            imgUrl: 'assets/images/4.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-21': {
+            name: 'Cauliflower Pilaf',
+            desc: 'with Chickpea & Cheese',
+            imgUrl: 'assets/images/5.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-22': {
+            name: 'Super-Grain Snacks Bowl',
+            desc: 'with Avocado & Veggies',
+            imgUrl: 'assets/images/3.png',
+            extra: 1.49,
+            price: price,
+        },
+        'meal-23': {
+            name: 'Vegetable Soup Bowl',
+            desc: 'with Chicken & Sweet Kabu',
+            imgUrl: 'assets/images/7.png',
+            extraPrice: 0,
+            price: price,
+        },
+        'meal-24': {
+            name: 'Kashmiri Rice',
+            desc: 'with Chicken & Coconut',
+            imgUrl: 'assets/images/8.png',
+            extraPrice: 0,
+            price: price,
+        },
+    };
 
-    function loadedMeals() {
-        for (let i = 1; i <= mealsLength; i++) {
+    function renderMeals() {
+        for (let i = 1; i <= 24; i++) {
             const { name, desc, imgUrl, extraPrice } = mealsDetail[`meal-${i}`];
             let content = '';
             if (extraPrice === 0) {
@@ -270,7 +409,7 @@ $(document).ready(function () {
             $('#meals').append(content);
         }
     }
-    loadedMeals();
+    renderMeals();
 
     $("#cart-up").on("click", function () {
         $("#cart-content").removeClass('d-none');
@@ -279,297 +418,170 @@ $(document).ready(function () {
         $("#cart-content").addClass('d-none');
     });
 
-    let addBtns = $('#meals .add-btn').toArray();
-    let addIcons = '';
-    let removeIcons = '';
+    function totalMeals() {
+        return Object.values(STATE.meals).reduce((a, b) => a + b, 0);
+    }
 
-    function loadedCart() {
-        const daySelected = localStorage.getItem('selectedDay');
-        const { day, month, date } = daysDetail[daySelected];
+    function calculateMealsTotal() {
+        const plan = plansDetail[STATE.planId];
+        let extras = 0;
+        for (let id in STATE.meals) {
+            extras += mealsDetail[id].extraPrice;
+        }
+        if (extras == 0) {
+            return `$${totalMeals() * plan.price}`;
+        }
+        else {
+            return `$${totalMeals() * plan.price} + $${extras}`;
+        }
+    }
+
+    function calculateTotal() {
+        const plan = plansDetail[STATE.planId];
+        let extras = 0;
+        for (let id in STATE.meals) {
+            extras += mealsDetail[id].extraPrice;
+        }
+        return (totalMeals() * plan.price) + extras;
+    }
+
+    const addBtns = $('.add-btn').toArray();
+
+    function renderCart() {
+        if(STATE.dayId){
+            const { day, month, date } = daysDetail[STATE.dayId];
         $('.delivery-day').html(`My delivery for: <strong>${day}</strong>, ${month} ${date}`);
-        totalCartItems = localStorage.getItem('totalItems');
-        if (totalCartItems > 0) {
-            const subTotalPrice = localStorage.getItem('subTotal');
-            const mealPrice = localStorage.getItem('mealPrice');
-            mealsCountDetail = JSON.parse(localStorage.getItem('mealsCountDetail'));
-            $('.cart-count').html(totalCartItems);
-            if (totalCartItems == 1) {
-                $('.cart-meals-count').html(`${totalCartItems} Meal`);
-            }
-            else {
-                $('.cart-meals-count').html(`${totalCartItems} Meals`);
-            }
-            $('.cart-meals-price').html(mealPrice);
-            $('.sub-total-text').html(subTotalPrice);
-            $('.cart-sub-total').html(`$${subTotalPrice}`);
-            if (totalCartItems < totalItems) {
-                $('.meal-left').html(`Please add <strong>${totalItems - totalCartItems} </strong> more meals.`);
-                addBtns.forEach(addBtn => {
-                    addBtn.disabled = false;
-                    addBtn.classList.remove('disabled');
-                });
-                $('.cart-next-btn').addClass('disabled');
-            }
-            else {
-                $('.meal-left').html(`<strong>Ready to go!</strong>`);
-                addBtns.forEach(addBtn => {
-                    addBtn.disabled = true;
-                    addBtn.classList.add('disabled');
-                });
-                $('.cart-next-btn').removeClass('disabled');
-            }
+        }
+        else{
+            const { day, month, date } = daysDetail['day-1'];
+        $('.delivery-day').html(`My delivery for: <strong>${day}</strong>, ${month} ${date}`);
+        }
 
+        const plan = plansDetail[STATE.planId];
+        const cartCount = totalMeals();
+
+        $('.cart-items').empty();
+        if (cartCount > 0) {
             let content = '';
-            for (const key in mealsCountDetail) {
-                const mealId = key;
-                const count = mealsCountDetail[mealId];
-                for (let i = 1; i <= count; i++) {
-                    const { name, imgUrl, extraPrice } = mealsDetail[mealId];
-                    if (extraPrice == 0) {
+            for (let id in STATE.meals) {
+                const mealCount = STATE.meals[id];
+                for (let i = 1; i <= mealCount; i++) {
+                    if (mealsDetail[id].extraPrice == 0) {
                         content += `
-                    <div id="card-${mealId}"
+                    <div id="card-${STATE.meals[id]}"
                         class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 p-1">
                         <div class="d-flex flex-row align-items-center car-img-top">
-                            <img class="img-fluid" width="92" height="60" src="${imgUrl}" alt="${name}">
-                            <p class="my-auto ms-2"><strong class="title">${name}</strong></p>
+                            <img class="img-fluid" width="92" height="60" src="${mealsDetail[id].imgUrl}" alt="${mealsDetail[id].name}">
+                            <p class="my-auto ms-2"><strong class="title">${mealsDetail[id].name}</strong></p>
                         </div>
                         <div class="d-flex flex-column gap-4">
-                            <i id="icon-${mealId}" class="fa-solid fa-plus"></i>
-                            <i id="icon-${mealId}" class="fa-solid fa-minus"></i>
+                            <i class="plus fa-solid fa-plus" data-id="${id}"></i>
+                            <i class="minus fa-solid fa-minus" data-id="${id}"></i>
                         </div>
                     </div>
             `
                     }
                     else {
                         content += `
-                    <div id="card-${mealId}"
-                        class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 bg-dark p-1 featured">
+                    <div id="card-${STATE.meals[id]}"
+                        class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 p-1 bg-dark featured">
                         <div class="d-flex flex-row align-items-center car-img-top">
-                            <img class="img-fluid" width="92" height="60" src="${imgUrl}" alt="${name}">
-                            <span class="extra-price px-1 m-1">+ $${extraPrice}</span>
-                            <p class="my-auto ms-2"><strong class="title">${name}</strong></p>
+                            <img class="img-fluid" width="92" height="60" src="${mealsDetail[id].imgUrl}" alt="${mealsDetail[id].name}">
+                            <span class="extra-price px-1 m-1">+ $${mealsDetail[id].extraPrice}</span>
+                            <p class="my-auto ms-2"><strong class="title">${mealsDetail[id].name}</strong></p>
                         </div>
                         <div class="d-flex flex-column gap-4">
-                            <i id="icon-${mealId}" class="fa-solid fa-plus text-white"></i>
-                            <i id="icon-${mealId}" class="fa-solid fa-minus text-white"></i>
+                            <i class="plus fa-solid fa-plus" data-id="${id}"></i>
+                            <i class="minus fa-solid fa-minus" data-id="${id}"></i>
                         </div>
                     </div>
-                    `
+            `
                     }
                 }
             }
             $('.cart-items').html(content);
-        }
-        else {
-            totalCartItems = 0;
-            localStorage.setItem('totalItems', totalCartItems);
-            $('.meal-left').html(`Please add total <strong>${totalItems} items</strong> to continue.`);
+            $('.cart-count').text(cartCount);
+            $('.cart-meals-price').html(calculateMealsTotal());
+            $('.sub-total-text').text(`${calculateTotal().toFixed(2)}`);
+            $('.cart-sub-total').text(`$${calculateTotal().toFixed(2)}`);
+            if (cartCount == 1) {
+                $('.cart-meals-count').text(`${cartCount} Meal`);
+            }
+            else {
+                $('.cart-meals-count').text(`${cartCount} Meals`);
+            }
+            if (cartCount === plan.count) {
+                $('.meal-left').html(`<strong>Ready to go!</strong>`);
+                addBtns.forEach(addBtn => {
+                    addBtn.disabled = true;
+                    addBtn.classList.add('disabled');
+                });
+                $('.cart-next-btn').removeClass('disabled');
+            } else {
+                let count = 0;
+                if (STATE.planId) {
+                    count = plansDetail[STATE.planId].count;
+                }
+                $('.meal-left').html(`Please add <strong>${count - cartCount} </strong> more meals.`);
+                addBtns.forEach(addBtn => {
+                    addBtn.disabled = false;
+                    addBtn.classList.remove('disabled');
+                });
+                $('.cart-next-btn').addClass('disabled');
+            }
+        } else {
+            let count = 0;
+            if (STATE.planId) {
+                count = plansDetail[STATE.planId].count;
+            }
+            $('.meal-left').html(`Please add total <strong>${count} items</strong> to continue.`);
             $('.clear').addClass('d-none');
             $('.cart-body-content').addClass('d-none');
             $('.cart-next-btn').addClass('disabled');
+            $('.cart-count').text(0);
+            $('.sub-total-text').text('');
             addBtns.forEach(addBtn => {
                 addBtn.disabled = false;
                 addBtn.classList.remove('disabled');
             });
         }
     }
-    loadedCart();
+    renderCart();
 
-    function savedCart() {
-        localStorage.setItem('totalItems', totalCartItems);
-        localStorage.setItem('subTotal', $('.sub-total-text').html());
-        localStorage.setItem('mealPrice', $('.cart-meals-price').html());
-        localStorage.setItem('mealsCountDetail', JSON.stringify(mealsCountDetail));
-    }
-
-    function addToCart(addBtn) {
+    $(document).on('click', '.add-btn, .plus', function () {
         $('.clear').removeClass('d-none');
         $('.cart-body-content').removeClass('d-none');
-        const mealId = addBtn.id.split('-').slice(1).join('-');
-        const { name, imgUrl, extraPrice, price } = mealsDetail[mealId];
-        let content = '';
-        totalCartItems++;
-        if (extraPrice == 0) {
-            content += `
-            <div id="card-${mealId}"
-                class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 p-1">
-                <div class="d-flex flex-row align-items-center car-img-top">
-                    <img class="img-fluid" width="92" height="60" src="${imgUrl}" alt="${name}">
-                    <p class="my-auto ms-2"><strong class="title">${name}</strong></p>
-                </div>
-                <div class="d-flex flex-column gap-4">
-                    <i id="icon-${mealId}" class="fa-solid fa-plus"></i>
-                    <i id="icon-${mealId}" class="fa-solid fa-minus"></i>
-                </div>
-            </div>
-            `
+        const id = $(this).data('id') || this.id.replace('btn-', '');
+        if (!STATE.meals[id]) STATE.meals[id] = 0;
+        if (totalMeals() < plansDetail[STATE.planId].count) {
+            STATE.meals[id]++;
+            saveState();
+            renderCart();
+            renderCheckout();
         }
-        else {
-            extras = (((extras * 100) + (extraPrice * 100)) / 100).toFixed(2);
-            content += `
-            <div id="card-${mealId}"
-                class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 bg-dark p-1 featured">
-                <div class="d-flex flex-row align-items-center car-img-top">
-                    <img class="img-fluid" width="92" height="60" src="${imgUrl}" alt="${name}">
-                    <span class="extra-price px-1 m-1">+ $${extraPrice}</span>
-                    <p class="my-auto ms-2"><strong class="title">${name}</strong></p>
-                </div>
-                <div class="d-flex flex-column gap-4">
-                    <i id="icon-${mealId}" class="fa-solid fa-plus text-white"></i>
-                    <i id="icon-${mealId}" class="fa-solid fa-minus text-white"></i>
-                </div>
-            </div>
-            `
-        }
-        if (mealsCountDetail[mealId]) {
-            mealsCountDetail[mealId]++;
-        }
-        else {
-            mealsCountDetail[mealId] = 1;
-        }
-
-        $('.cart-items').append(content);
-        addIcons = $('.cart-items .fa-plus').toArray();
-        removeIcons = $('.cart-items .fa-minus').toArray();
-
-        if (totalCartItems === 1) {
-            $('.cart-meals-count').html(`${totalCartItems} Meal`);
-        }
-        else {
-            $('.cart-meals-count').html(`${totalCartItems} Meals`);
-        }
-        $('.cart-count').html(totalCartItems);
-
-        if (extras === 0) {
-            $('.cart-meals-price').html(`$${price * totalCartItems}`);
-        }
-        else {
-            $('.cart-meals-price').html(`$${price * totalCartItems} + $${extras}`);
-        }
-
-        const calculatedPrice = (price * totalCartItems * 100) + (extras * 100);
-        $('.cart-sub-total').html(`$${(calculatedPrice / 100).toFixed(2)}`);
-        $('.sub-total-text').html(`${(calculatedPrice / 100).toFixed(2)}`);
-
-        if (totalCartItems < totalItems) {
-            $('.cart-next-btn').addClass('disabled');
-            addBtns.forEach(addBtn => {
-                addBtn.disabled = false;
-                addBtn.classList.remove('disabled');
-            });
-            const itemsRem = totalItems - totalCartItems;
-            if (itemsRem > 1) {
-                $('.meal-left').html(`Please add <strong>${totalItems - totalCartItems} </strong> more meals.`);
-            }
-            else if (itemsRem == 1) {
-                $('.meal-left').html(`Please add <strong>${totalItems - totalCartItems} </strong> more meal.`);
-            }
-        }
-        else {
-            addBtns.forEach(addBtn => {
-                addBtn.disabled = true;
-                addBtn.classList.add('disabled');
-            });
-            addIcons.forEach(addIcon => {
-                addIcon.disabled = true;
-                addIcon.classList.add('disabled');
-            });
-            $('.cart-next-btn').removeClass('disabled');
-            $('.meal-left').html(`<strong>Ready to go!</strong>`);
-        }
-        savedCart();
-    }
-
-    function removeFromCart(removeBtn) {
-        const mealId = removeBtn.id.split('-').slice(1).join('-');
-        const { extraPrice, price } = mealsDetail[mealId];
-        totalCartItems--;
-        mealsCountDetail[mealId]--;
-        if (totalCartItems == 0) {
-            clearCart();
-        }
-        else if (totalCartItems == 1) {
-            $('.cart-meals-count').html(`${totalCartItems} Meal`);
-        }
-        else {
-            $('.cart-meals-count').html(`${totalCartItems} Meals`);
-        }
-        $('.cart-count').html(totalCartItems);
-
-        if (extras === 0) {
-            $('.cart-meals-price').html(`$${price * totalCartItems}`);
-        }
-        else {
-            $('.cart-meals-price').html(`$${price * totalCartItems} + $${extras}`);
-        }
-
-        const calculatedPrice = (price * totalCartItems * 100) + (extras * 100);
-        $('.cart-sub-total').html(`$${(calculatedPrice / 100).toFixed(2)}`);
-        $('.sub-total-text').html(`${(calculatedPrice / 100).toFixed(2)}`);
-
-        $('.cart-next-btn').addClass('disabled');
-        addBtns.forEach(addBtn => {
-            addBtn.disabled = false;
-            addBtn.classList.remove('disabled');
-        });
-        const itemsRem = totalItems - totalCartItems;
-        if (itemsRem > 1) {
-            $('.meal-left').html(`Please add <strong>${totalItems - totalCartItems} </strong> more meals.`);
-        }
-        else if (itemsRem == 1) {
-            $('.meal-left').html(`Please add <strong>${totalItems - totalCartItems} </strong> more meal.`);
-        }
-        savedCart();
-        loadedCart();
-    }
-
-    addBtns.forEach(addBtn => {
-        addBtn.addEventListener('click', function () {
-            addToCart(addBtn);
-            addIcons.forEach(addIcon => {
-                addIcon.addEventListener('click', function () {
-                    addToCart(addIcon);
-                });
-            });
-
-            removeIcons.forEach(removeIcon => {
-                removeIcon.addEventListener('click', function () {
-                    removeFromCart(removeIcon);
-                });
-            });
-        });
     });
 
-    function clearCart() {
-        extras = 0;
-        totalCartItems = 0;
-        mealsCountDetail = {};
-        $('.meal-left').html(`Please add total <strong>${totalItems} items</strong> to continue.`);
-        $('.cart-items').html('');
-        $('.cart-count').html(totalCartItems);
-        $('.sub-total-text').html('');
-        $('.cart-meals-price').html('');
-        $('.clear').addClass('d-none');
-        $('.cart-body-content').addClass('d-none');
-        $('.cart-next-btn').addClass('disabled');
-        addBtns.forEach(addBtn => {
-            addBtn.disabled = false;
-            addBtn.classList.remove('disabled');
-        });
-        savedCart();
-        loadedCart();
-    }
-
-    $(".clear").on("click", function () {
-        clearCart();
+    $(document).on('click', '.minus', function () {
+        const id = $(this).data('id');
+        STATE.meals[id]--;
+        if (STATE.meals[id] <= 0) delete STATE.meals[id];
+        saveState();
+        renderCart();
+        renderCheckout();
     });
 
-    $(".cart-next-btn").on("click", function () {
-        savedCart();
-        wizard.steps("next");
+    $('.clear').on('click', () => {
+        resetMeals();
+        renderCart();
+        renderCheckout();
     });
 
-    // Checkout Section
+    $('.cart-next-btn').on('click', function () {
+        renderCheckout();
+        wizard.steps('next');
+    });
+
+    /* Checkout Section */
     let isValidated = false;
     $("#fname").on("input", function () { validatefName($('#fname').val()); });
     $("#lname").on("input", function () { validatelName($('#lname').val()); });
@@ -794,84 +806,80 @@ $(document).ready(function () {
         return hasAllDigits(code) && code >= 1 && code <= 50;
     }
 
-    $("#checkout-btn").on("click", function () {
-        isValidated = (validatefName($('#fname').val()) &&
-            validatelName($('#lname').val()) &&
-            validateName($('#name').val()) &&
-            validateLine1($('#line1').val()) &&
-            validateCity($('#city').val()) &&
-            validateState($('#state').val()) &&
-            validateZip($('#zip').val()) &&
-            validatePhone($('#phone').val()) &&
-            validateEmail($('#email').val()));
-        if (isValidated) {
-            alert('Order placed successfully!');
+    const shipping = 8.99;
+    const tax = 10.99;
 
-            localStorage.removeItem('selectedPlanId');
-            localStorage.removeItem('selectedDay');
-            localStorage.removeItem('totalItems');
-            localStorage.removeItem('subTotal');
-            localStorage.removeItem('mealPrice');
-            mealsCountDetail = {};
-            localStorage.setItem('mealsCountDetail', JSON.stringify(mealsCountDetail));
+    function calculateDiscount(promoCode) {
+        return calculateTotal() * promoCode / 100;
+    }
 
-            $("#wizard").steps("previous");
-        }
-        else {
-            $("#checkout-btn").addClass('disabled');
+    $('#promo-code').on("click", function () {
+        $('#promo-code').addClass('d-none');
+        $('#promo-input').removeClass('d-none');
+        $('#promo-input').focus();
+    });
+
+    $('#reset-promo').on("click", function () {
+        resetPromoCode();
+        renderCheckout();
+    });
+
+    $('#promo-input').on("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const promoCode = $('#promo-input').val();
+            if (promoCode && isValidCode(promoCode)) {
+                STATE.promoCode = promoCode;
+                saveState();
+            }
+            else {
+                resetPromoCode();
+            }
+            renderCheckout();
         }
     });
 
-    const checkoutCart = document.getElementById('checkout-cart');
-    const orderPrice = document.getElementById('order-price');
-    const orderTotal = document.getElementById('order-total');
-    const promoCode = document.getElementById('promo-code');
-    const promoInput = document.getElementById('promo-input');
-    const discount = document.getElementById('discount');
-    const shipping = 8.99;
-    const tax = 10.99;
-    let orderSubTotal = 0;
-    let orderTotalPrice = 0;
-    let discountedAmount = 0;
-
-    if (promoCode) {
-        promoCode.addEventListener('click', function () {
-            promoCode.classList.add('d-none');
-            promoInput.classList.remove('d-none');
-            promoInput.focus();
-        });
-        promoInput.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                const code = promoInput.value.trim();
-                promoCode.classList.remove('d-none');
-                promoInput.classList.add('d-none');
-                if (code && isValidCode(code)) {
-                    discount.classList.remove('d-none');
-                    discountedAmount = (((orderSubTotal * 100) * (code / 100)) / 100).toFixed(2);
-                    discount.innerHTML = `
-                    <span>Discount</span>
-                    <span class="fw-bold text-success">-$${discountedAmount}</span>
+    function renderCheckout() {
+        let total = 0;
+        if (STATE.planId) {
+            total = calculateTotal();
+        }
+        let discount = 0;
+        if (STATE.promoCode) {
+            discount = calculateDiscount(STATE.promoCode).toFixed(2);
+            const content =
                 `
-                    orderTotalPrice = ((orderTotalPrice * 100 - discountedAmount * 100) / 100).toFixed(2);
-                    orderTotal.innerHTML = `$${orderTotalPrice}`;
-                }
-            }
-        });
-    }
-    function loadedCheckoutCart() {
-        orderSubTotal = localStorage.getItem('subTotal');
-        orderPrice.innerHTML = `$${orderSubTotal}`;
-        orderTotalPrice = ((orderSubTotal * 100 + shipping * 100 + tax * 100) / 100).toFixed(2);
-        orderTotal.innerHTML = `$${orderTotalPrice}`;
-        const { day, month, date } = daysDetail[localStorage.getItem('selectedDay')];
-        $('#checkout-delivery').html(`${day}, ${month} ${date}`);
+                <span>Discount</span>
+                <span class="fw-bold text-success">-$${discount}</span>
+            `
+            $('#promo-code').addClass('d-none');
+            $('#promo-applied').removeClass('d-none');
+            $('#promo-value').text(STATE.promoCode);
+            $('#discount').removeClass('d-none');
+            $('#discount').html(content);
+        }
+        else {
+            $('#promo-code').removeClass('d-none');
+            $('#promo-applied').addClass('d-none');
+            $('#discount').addClass('d-none');
+        }
+        $('#promo-input').addClass('d-none');
+        $('#order-price').text(`$${total.toFixed(2)}`);
+        $('#order-total').text(`$${(total + shipping + tax - discount).toFixed(2)}`);
 
-        mealsCountDetail = JSON.parse(localStorage.getItem('mealsCountDetail'));
+        if (STATE.dayId) {
+            const { day, month, date } = daysDetail[STATE.dayId];
+            $('#checkout-delivery').html(`${day}, ${month} ${date}`);
+        }
+        else{
+            const { day, month, date } = daysDetail['day-1'];
+            $('#checkout-delivery').html(`${day}, ${month} ${date}`);
+        }
+
         let content = '';
-        for (const key in mealsCountDetail) {
-            const mealId = key;
-            const count = mealsCountDetail[mealId];
+        for (let id in STATE.meals) {
+            const mealId = id;
+            const count = STATE.meals[id];
             const { name, desc, imgUrl, extraPrice } = mealsDetail[mealId];
             if (extraPrice == 0) {
                 content += `
@@ -907,7 +915,33 @@ $(document).ready(function () {
                 `
             }
         }
-        checkoutCart.innerHTML = content;
+        $('#checkout-cart').html(content);
     }
-    loadedCheckoutCart();
+    renderCheckout();
+
+    $("#checkout-btn").on("click", function () {
+        isValidated = (validatefName($('#fname').val()) &&
+            validatelName($('#lname').val()) &&
+            validateName($('#name').val()) &&
+            validateLine1($('#line1').val()) &&
+            validateCity($('#city').val()) &&
+            validateState($('#state').val()) &&
+            validateZip($('#zip').val()) &&
+            validatePhone($('#phone').val()) &&
+            validateEmail($('#email').val()));
+        if (isValidated) {
+            alert('Order placed successfully!');
+
+            $('#checkout-form')[0].reset();
+            resetPlan();
+            resetDay();
+            resetMeals();
+            resetState();
+            renderCheckout();
+            renderCart();
+        }
+        else {
+            $("#checkout-btn").addClass('disabled');
+        }
+    });
 });
