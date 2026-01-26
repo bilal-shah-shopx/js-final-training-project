@@ -149,187 +149,187 @@ $(document).ready(function () {
         'meal-1': {
             name: 'Mix Veggies',
             desc: 'with Cabbage, Carrots & Chicken',
-            imgUrl: 'assets/images/1.png',
+            imgUrl: 'assets/images/1.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-2': {
             name: 'Protein-Packed Chicken Salad',
             desc: 'with Fruits & Seeds',
-            imgUrl: 'assets/images/2.png',
+            imgUrl: 'assets/images/2.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-3': {
             name: 'Super-Grain Snacks Bowl',
             desc: 'with Avocado & Veggies',
-            imgUrl: 'assets/images/3.png',
+            imgUrl: 'assets/images/3.webp',
             extraPrice: 11.49,
             price: price,
         },
         'meal-4': {
             name: 'Stir Fried Rice Noodles Bowl',
             desc: 'with Mushroom & Spanish Pepper',
-            imgUrl: 'assets/images/4.png',
+            imgUrl: 'assets/images/4.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-5': {
             name: 'Cauliflower Pilaf',
             desc: 'with Chickpea & Cheese',
-            imgUrl: 'assets/images/5.png',
+            imgUrl: 'assets/images/5.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-6': {
             name: 'Keto-Friendly Pasta Bowl',
             desc: 'with Tina & Spanish',
-            imgUrl: 'assets/images/6.png',
+            imgUrl: 'assets/images/6.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-7': {
             name: 'Vegetable Soup Bowl',
             desc: 'with Chicken & Sweet Kabu',
-            imgUrl: 'assets/images/7.png',
+            imgUrl: 'assets/images/7.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-8': {
             name: 'Kashmiri Rice',
             desc: 'with Chicken & Coconut',
-            imgUrl: 'assets/images/8.png',
+            imgUrl: 'assets/images/8.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-9': {
             name: 'Mix Veggies',
             desc: 'with Cabbage, Carrots & Chicken',
-            imgUrl: 'assets/images/1.png',
+            imgUrl: 'assets/images/1.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-10': {
             name: 'Super-Grain Snacks Bowl',
             desc: 'with Avocado & Veggies',
-            imgUrl: 'assets/images/3.png',
+            imgUrl: 'assets/images/3.webp',
             extraPrice: 1.49,
             price: price,
         },
         'meal-11': {
             name: 'Protein-Packed Chicken Salad',
             desc: 'with Fruits & Seeds',
-            imgUrl: 'assets/images/2.png',
+            imgUrl: 'assets/images/2.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-12': {
             name: 'Stir Fried Rice Noodles Bowl',
             desc: 'with Mushroom & Spanish Pepper',
-            imgUrl: 'assets/images/4.png',
+            imgUrl: 'assets/images/4.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-13': {
             name: 'Cauliflower Pilaf',
             desc: 'with Chickpea & Cheese',
-            imgUrl: 'assets/images/5.png',
+            imgUrl: 'assets/images/5.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-14': {
             name: 'Keto-Friendly Pasta Bowl',
             desc: 'with Tina & Spanish',
-            imgUrl: 'assets/images/6.png',
+            imgUrl: 'assets/images/6.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-15': {
             name: 'Vegetable Soup Bowl',
             desc: 'with Chicken & Sweet Kabu',
-            imgUrl: 'assets/images/7.png',
+            imgUrl: 'assets/images/7.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-16': {
             name: 'Kashmiri Rice',
             desc: 'with Chicken & Coconut',
-            imgUrl: 'assets/images/8.png',
+            imgUrl: 'assets/images/8.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-17': {
             name: 'Mix Veggies',
             desc: 'with Cabbage, Carrots & Chicken',
-            imgUrl: 'assets/images/1.png',
+            imgUrl: 'assets/images/1.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-18': {
             name: 'Protein-Packed Chicken Salad',
             desc: 'with Fruits & Seeds',
-            imgUrl: 'assets/images/2.png',
+            imgUrl: 'assets/images/2.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-19': {
             name: 'Keto-Friendly Pasta Bowl',
             desc: 'with Tina & Spanish',
-            imgUrl: 'assets/images/6.png',
+            imgUrl: 'assets/images/6.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-20': {
             name: 'Stir Fried Rice Noodles Bowl',
             desc: 'with Mushroom & Spanish Pepper',
-            imgUrl: 'assets/images/4.png',
+            imgUrl: 'assets/images/4.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-21': {
             name: 'Cauliflower Pilaf',
             desc: 'with Chickpea & Cheese',
-            imgUrl: 'assets/images/5.png',
+            imgUrl: 'assets/images/5.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-22': {
             name: 'Super-Grain Snacks Bowl',
             desc: 'with Avocado & Veggies',
-            imgUrl: 'assets/images/3.png',
-            extra: 1.49,
+            imgUrl: 'assets/images/3.webp',
+            extraPrice: 1.49,
             price: price,
         },
         'meal-23': {
             name: 'Vegetable Soup Bowl',
             desc: 'with Chicken & Sweet Kabu',
-            imgUrl: 'assets/images/7.png',
+            imgUrl: 'assets/images/7.webp',
             extraPrice: 0,
             price: price,
         },
         'meal-24': {
             name: 'Kashmiri Rice',
             desc: 'with Chicken & Coconut',
-            imgUrl: 'assets/images/8.png',
+            imgUrl: 'assets/images/8.webp',
             extraPrice: 0,
             price: price,
         },
     };
 
     function renderMeals() {
+        let content = '';
         for (let i = 1; i <= 24; i++) {
             const { name, desc, imgUrl, extraPrice } = mealsDetail[`meal-${i}`];
-            let content = '';
-            if (extraPrice === 0) {
-                content += `
+            content += `
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-1">
-                <div id="meal-${i}" class="card">
+                <div id="meal-${i}" class = "card ${extraPrice ? 'featured' : ''}">
                     <div class="card-img-top">
                         <img class="img-fluid w-100" src="${imgUrl}" alt="${name}">
+                        ${extraPrice ? `<span class="extra-price py-1 px-2">+ $${extraPrice}</span>` : ''}
                     </div>
                     <div class="card-body p-2">
-                        <strong class="title">${name}</strong>
-                        <p class="desc">${desc}</p>
+                        <strong class="title ${extraPrice ? 'featured' : ''}">${name}</strong>
+                        <p class="desc ${extraPrice ? 'featured' : ''}">${desc}</p>
                         <div class="d-flex justify-content-between desc">
                             <div class="d-flex flex-column pe-1 me-1 position-relative">
                                 <div class="divider position-absolute"></div>
@@ -361,53 +361,8 @@ $(document).ready(function () {
                 </div>
             </div>
             `
-            }
-            else {
-                content += `
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-1">
-                <div id="meal-${i}" class="card featured">
-                    <div class="card-img-top">
-                        <img class="img-fluid w-100" src="${imgUrl}" alt="${name}">
-                        <span class="extra-price py-1 px-2">+ $${extraPrice}</span>
-                    </div>
-                    <div class="card-body p-2">
-                        <strong class="title featured">${name}</strong>
-                        <div class="desc featured">
-                            <p>${desc}</p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-column pe-1 me-1 position-relative">
-                                    <div class="divider position-absolute"></div>
-                                    <span>Gluten</span>
-                                    <span>Free</span>
-                                </div>
-                                <div class="d-flex flex-column pe-1 me-1 position-relative">
-                                    <div class="divider position-absolute"></div>
-                                    <span>560</span>
-                                    <span>Cals</span>
-                                </div>
-                                <div class="d-flex flex-column pe-1 me-1 position-relative">
-                                    <div class="divider position-absolute"></div>
-                                    <span>35</span>
-                                    <span>Carbs</span>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <span>46</span>
-                                    <span>Protiens</span>
-                                </div>
-                                <button id="btn-meal-${i}"
-                                    class="add-btn text-white d-flex justify-content-center align-items-center ms-2 px-2 border-0 rounded flex-wrap">
-                                    <i class="fa-solid fa-plus fa-xs"></i>
-                                    <span>Add</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
-            }
-            $('#meals').append(content);
         }
+        $('#meals').append(content);
     }
     renderMeals();
 
@@ -448,13 +403,13 @@ $(document).ready(function () {
     const addBtns = $('.add-btn').toArray();
 
     function renderCart() {
-        if(STATE.dayId){
+        if (STATE.dayId) {
             const { day, month, date } = daysDetail[STATE.dayId];
-        $('.delivery-day').html(`My delivery for: <strong>${day}</strong>, ${month} ${date}`);
+            $('.delivery-day').html(`My delivery for: <strong>${day}</strong>, ${month} ${date}`);
         }
-        else{
+        else {
             const { day, month, date } = daysDetail['day-1'];
-        $('.delivery-day').html(`My delivery for: <strong>${day}</strong>, ${month} ${date}`);
+            $('.delivery-day').html(`My delivery for: <strong>${day}</strong>, ${month} ${date}`);
         }
 
         const plan = plansDetail[STATE.planId];
@@ -466,28 +421,14 @@ $(document).ready(function () {
             for (let id in STATE.meals) {
                 const mealCount = STATE.meals[id];
                 for (let i = 1; i <= mealCount; i++) {
-                    if (mealsDetail[id].extraPrice == 0) {
-                        content += `
+                    content += `
                     <div id="card-${STATE.meals[id]}"
-                        class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 p-1">
+                        class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 p-1 ${mealsDetail[id].extraPrice ? 'bg-dark featured' : ''}">
                         <div class="d-flex flex-row align-items-center car-img-top">
                             <img class="img-fluid" width="92" height="60" src="${mealsDetail[id].imgUrl}" alt="${mealsDetail[id].name}">
-                            <p class="my-auto ms-2"><strong class="title">${mealsDetail[id].name}</strong></p>
-                        </div>
-                        <div class="d-flex flex-column gap-4">
-                            <i class="plus fa-solid fa-plus" data-id="${id}"></i>
-                            <i class="minus fa-solid fa-minus" data-id="${id}"></i>
-                        </div>
-                    </div>
-            `
-                    }
-                    else {
-                        content += `
-                    <div id="card-${STATE.meals[id]}"
-                        class="card d-flex flex-row align-items-center justify-content-between gap-1 pe-2 p-1 bg-dark featured">
-                        <div class="d-flex flex-row align-items-center car-img-top">
-                            <img class="img-fluid" width="92" height="60" src="${mealsDetail[id].imgUrl}" alt="${mealsDetail[id].name}">
+                            ${mealsDetail[id].extraPrice ? `
                             <span class="extra-price px-1 m-1">+ $${mealsDetail[id].extraPrice}</span>
+                                `: ''}
                             <p class="my-auto ms-2"><strong class="title">${mealsDetail[id].name}</strong></p>
                         </div>
                         <div class="d-flex flex-column gap-4">
@@ -495,8 +436,7 @@ $(document).ready(function () {
                             <i class="minus fa-solid fa-minus" data-id="${id}"></i>
                         </div>
                     </div>
-            `
-                    }
+                    `
                 }
             }
             $('.cart-items').html(content);
@@ -871,7 +811,7 @@ $(document).ready(function () {
             const { day, month, date } = daysDetail[STATE.dayId];
             $('#checkout-delivery').html(`${day}, ${month} ${date}`);
         }
-        else{
+        else {
             const { day, month, date } = daysDetail['day-1'];
             $('#checkout-delivery').html(`${day}, ${month} ${date}`);
         }
@@ -881,39 +821,23 @@ $(document).ready(function () {
             const mealId = id;
             const count = STATE.meals[id];
             const { name, desc, imgUrl, extraPrice } = mealsDetail[mealId];
-            if (extraPrice == 0) {
-                content += `
-                    <div class="card rounded-0 d-flex flex-row align-items-center gap-1 pe-2 p-1">
-                        <div class="d-flex flex-row align-items-center">
-                            <p class="d-flex px-3 my-auto fw-bold">${count}</p>
-                            <div class="position-relative d-flex">
-                                <img class="img-fluid" width="130" height="100" src="${imgUrl}" alt="${name}">
-                            </div>
-                            <div class="d-flex flex-column">
-                                <p class="my-auto ms-2"><strong class="title">${name}</strong></p>
-                                <p class="desc my-auto ms-2 text-secondary">${desc}</p>
-                            </div>
-                        </div>
+            content += `
+            <div class="card rounded-0 d-flex flex-row align-items-center gap-1 pe-2 p-1 ${extraPrice ? 'bg-dark featured' : ''}">
+                <div class="d-flex flex-row align-items-center">
+                    <p class="d-flex px-3 my-auto fw-bold">${count}</p>
+                    <div class="position-relative d-flex">
+                        <img class="img-fluid" width="130" height="100" src="${imgUrl}" alt="${name}">
+                        ${extraPrice ? `
+                        <span class="extra-price px-2">+$55.98</span>
+                            `: ''}
                     </div>
-                    `
-            }
-            else {
-                content += `
-                    <div class="card rounded-0 d-flex flex-row align-items-center gap-1 pe-2 p-1 bg-dark featured">
-                        <div class="d-flex flex-row align-items-center">
-                            <p class="d-flex px-3 my-auto fw-bold">${count}</p>
-                            <div class="position-relative d-flex">
-                                <img class="img-fluid" width="130" height="100" src="${imgUrl}" alt="${name}">
-                                <span class="extra-price px-2">+$55.98</span>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <p class="my-auto ms-2"><strong class="title">${name}</strong></p>
-                                <p class="desc my-auto ms-2 text-white">${desc}</p>
-                            </div>
-                        </div>
+                    <div class="d-flex flex-column">
+                        <p class="my-auto ms-2"><strong class="title">${name}</strong></p>
+                        <p class="desc my-auto ms-2 text-secondary">${desc}</p>
                     </div>
-                `
-            }
+                </div>
+            </div>
+            `
         }
         $('#checkout-cart').html(content);
     }
@@ -931,7 +855,6 @@ $(document).ready(function () {
             validateEmail($('#email').val()));
         if (isValidated) {
             alert('Order placed successfully!');
-
             $('#checkout-form')[0].reset();
             resetPlan();
             resetDay();
@@ -939,6 +862,7 @@ $(document).ready(function () {
             resetState();
             renderCheckout();
             renderCart();
+            location.reload();
         }
         else {
             $("#checkout-btn").addClass('disabled');
